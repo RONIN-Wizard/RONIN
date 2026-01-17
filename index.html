@@ -109,7 +109,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: stretch;
-      min-height: 130vh;
+      min-height: 110vh;
       border-bottom: 2px solid #C92828;
       position: relative;
       overflow: hidden;
@@ -122,7 +122,7 @@
       inset: 0;
       background: url('RoninHero.webp') center center / cover no-repeat;
       transform-origin: center;
-      transform: scale(1);
+      transform: scale(1.08);
       z-index: 0;
       will-change: transform;
       transition: transform 0.2s ease-out;
@@ -196,18 +196,24 @@
       z-index: 2;
       width: 320px;
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
-    .news-carousel-wrapper {
+    .news-card-standalone {
       background: linear-gradient(135deg, rgba(238, 238, 238, 0.95) 0%, rgba(230, 230, 230, 0.95) 100%);
       border: 2px solid #C92828;
       overflow: hidden;
       backdrop-filter: blur(15px);
       position: relative;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
     }
 
-    .news-carousel-wrapper::before {
+    .news-card-standalone::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -220,96 +226,38 @@
       z-index: 0;
     }
 
-    .news-carousel-wrapper * {
+    .news-card-standalone * {
       position: relative;
       z-index: 1;
     }
 
-    .news-carousel-header {
-      background: linear-gradient(135deg, #eeeeee 0%, #e6e6e6 100%);
-      padding: 1.2rem;
-      border-bottom: 2px solid #C92828;
-      position: relative;
-      z-index: 2;
-    }
-
-    .news-carousel-header h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #C92828;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      text-align: center;
-      font-family: 'TheLastShuriken';
-    }
-
-    .news-carousel-container {
-      height: 600px;
-      overflow: hidden;
-      position: relative;
-      background: #eeeeee;
-    }
-
-    .news-carousel-track {
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.6s ease-in-out;
-    }
-
-    .news-card {
-      min-height: 300px;
-      height: 300px;
-      background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
-      border-bottom: 1px solid rgba(201, 40, 40, 0.2);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .news-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: linear-gradient(180deg, #C92828 0%, rgba(201, 40, 40, 0.3) 100%);
-      z-index: 3;
-    }
-
-    .news-card-image {
+    .news-card-standalone-image {
       width: 100%;
-      height: 120px;
+      height: 140px;
       background-size: cover;
       background-position: center;
-      position: relative;
       border-bottom: 1px solid rgba(201, 40, 40, 0.3);
     }
 
-    .news-card-content {
+    .news-card-standalone-content {
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
       flex: 1;
-      position: relative;
-      z-index: 2;
     }
 
-    .news-card-date {
+    .news-card-standalone-date {
       font-size: 0.7rem;
       color: #C92828;
       font-weight: 600;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       letter-spacing: 2px;
       font-family: 'Montserrat';
     }
 
-    .news-card-title {
-      font-size: 1.1rem;
+    .news-card-standalone-title {
+      font-size: 1rem;
       font-weight: 600;
       color: #000;
       margin-bottom: 1rem;
@@ -318,14 +266,15 @@
       font-family: 'Montserrat';
     }
 
-    .news-card-footer {
+    .news-card-standalone-footer {
       margin-top: auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.5rem;
     }
 
-    .news-card-category {
+    .news-card-standalone-category {
       display: inline-block;
       background: transparent;
       border: 1px solid #C92828;
@@ -336,9 +285,10 @@
       text-transform: uppercase;
       letter-spacing: 1.5px;
       font-family: 'Montserrat';
+      white-space: nowrap;
     }
 
-    .news-card-read-more {
+    .news-card-standalone-read-more {
       background: transparent;
       border: 1px solid rgba(201, 40, 40, 0.5);
       color: #C92828;
@@ -350,63 +300,13 @@
       cursor: pointer;
       transition: all 0.3s;
       font-family: 'Montserrat';
+      white-space: nowrap;
     }
 
-    .news-card-read-more:hover {
+    .news-card-standalone-read-more:hover {
       background: #C92828;
       color: #fff;
       border-color: #C92828;
-    }
-
-    .carousel-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem;
-      background: linear-gradient(135deg, #eeeeee 0%, #e6e6e6 100%);
-      border-top: 1px solid rgba(201, 40, 40, 0.3);
-      position: relative;
-      z-index: 2;
-    }
-
-    .carousel-arrow {
-      background: transparent;
-      border: 1px solid #C92828;
-      color: #C92828;
-      width: 35px;
-      height: 35px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .carousel-arrow:hover {
-      background: #C92828;
-      color: #fff;
-    }
-
-    .carousel-dots {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 0;
-      background: rgba(201, 40, 40, 0.3);
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .carousel-dot.active {
-      background: #C92828;
     }
 
     /* Merch Section */
@@ -851,10 +751,23 @@
     .competitive-item {
       background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
       border: 2px solid rgba(201, 40, 40, 0.3);
-      padding: 50px 40px;
+      padding: 0;
       text-align: center;
       position: relative;
       transition: all 0.4s ease;
+      overflow: hidden;
+    }
+
+    .competitive-item-image {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-bottom: 2px solid rgba(201, 40, 40, 0.3);
+    }
+
+    .competitive-item-content {
+      padding: 50px 40px;
     }
 
     .competitive-item::before {
@@ -1095,62 +1008,26 @@
 
     <div class="hero-right">
       <div class="news-carousel-section">
-        <div class="news-carousel-wrapper">
-          <div class="news-carousel-header">
-            <h3>LATEST</h3>
-          </div>
-          <div class="news-carousel-container">
-            <div class="news-carousel-track" id="newsTrack">
-              <div class="news-card">
-                <div class="news-card-image" style="background-image: url('DSC00017.JPG');"></div>
-                <div class="news-card-content">
-                  <div class="news-card-date">16 OCT 25</div>
-                  <div class="news-card-title">Esports Expansion</div>
-                  <div class="news-card-footer">
-                    <div class="news-card-category">ANNOUNCEMENT</div>
-                    <button class="news-card-read-more">READ MORE</button>
-                  </div>
-                </div>
-              </div>
-              <div class="news-card">
-                <div class="news-card-image" style="background-image: url('DSC00017.JPG');"></div>
-                <div class="news-card-content">
-                  <div class="news-card-date">11 OCT 25</div>
-                  <div class="news-card-title">New Partnership</div>
-                  <div class="news-card-footer">
-                    <div class="news-card-category">PARTNERS</div>
-                    <button class="news-card-read-more">READ MORE</button>
-                  </div>
-                </div>
-              </div>
-              <div class="news-card">
-                <div class="news-card-image" style="background-image: url('DSC00017.JPG');"></div>
-                <div class="news-card-content">
-                  <div class="news-card-date">3 OCT 25</div>
-                  <div class="news-card-title">Roster Update</div>
-                  <div class="news-card-footer">
-                    <div class="news-card-category">ROSTER</div>
-                    <button class="news-card-read-more">READ MORE</button>
-                  </div>
-                </div>
-              </div>
-              <div class="news-card">
-                <div class="news-card-image" style="background-image: url('DSC00017.JPG');"></div>
-                <div class="news-card-content">
-                  <div class="news-card-date">28 SEP 25</div>
-                  <div class="news-card-title">Community Event</div>
-                  <div class="news-card-footer">
-                    <div class="news-card-category">COMMUNITY</div>
-                    <button class="news-card-read-more">READ MORE</button>
-                  </div>
-                </div>
-              </div>
+        <div class="news-card-standalone">
+          <div class="news-card-standalone-image" style="background-image: url('DSC00017.JPG');"></div>
+          <div class="news-card-standalone-content">
+            <div class="news-card-standalone-date">5 JAN 26</div>
+            <div class="news-card-standalone-title">DIG Photon Talks About the Upcoming LCS split</div>
+            <div class="news-card-standalone-footer">
+              <div class="news-card-standalone-category">INTERVIEWS</div>
+              <button class="news-card-standalone-read-more">READ</button>
             </div>
           </div>
-          <div class="carousel-controls">
-            <button class="carousel-arrow" id="prevBtn">▲</button>
-            <div class="carousel-dots" id="carouselDots"></div>
-            <button class="carousel-arrow" id="nextBtn">▼</button>
+        </div>
+        <div class="news-card-standalone">
+          <div class="news-card-standalone-image" style="background-image: url('DSC00017.JPG');"></div>
+          <div class="news-card-standalone-content">
+            <div class="news-card-standalone-date">21 DEC 25</div>
+            <div class="news-card-standalone-title">The Basics of Combat in Fortnite with Acorn</div>
+            <div class="news-card-standalone-footer">
+              <div class="news-card-standalone-category">GUIDES</div>
+              <button class="news-card-standalone-read-more">READ</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1329,14 +1206,20 @@
     </div>
     <div class="competitive-grid">
       <div class="competitive-item">
-        <h3>Fortnite</h3>
-        <p>Our flagship competitive division. Multiple rosters competing in FNCS, Cash Cups, and major tournaments with consistent top placements.</p>
-        <a href="team.html">VIEW ROSTER</a>
+        <div class="competitive-item-image" style="background-image: url('https://placehold.co/800x400/1a1a1a/C92828?text=Fortnite+Competitive');"></div>
+        <div class="competitive-item-content">
+          <h3>Fortnite</h3>
+          <p>Our flagship competitive division. Multiple rosters competing in FNCS, Cash Cups, and major tournaments with consistent top placements.</p>
+          <a href="team.html">VIEW ROSTER</a>
+        </div>
       </div>
       <div class="competitive-item">
-        <h3>Content Creation</h3>
-        <p>Professional content creators building audiences and strengthening the Ronin brand across YouTube, Twitch, and TikTok platforms.</p>
-        <a href="team.html">MEET CREATORS</a>
+        <div class="competitive-item-image" style="background-image: url('https://placehold.co/800x400/1a1a1a/C92828?text=Content+Creation');"></div>
+        <div class="competitive-item-content">
+          <h3>Content Creation</h3>
+          <p>Professional content creators building audiences and strengthening the Ronin brand across YouTube, Twitch, and TikTok platforms.</p>
+          <a href="team.html">MEET CREATORS</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1410,75 +1293,10 @@
     const heroBg = document.querySelector('.hero-bg');
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
-      const maxZoom = 1.25;
-      const zoom = 1 + Math.min(scrollY / 1200, maxZoom - 1);
+      const maxZoom = 1.33;
+      const zoom = 1.08 + Math.min(scrollY / 1200, maxZoom - 1.08);
       heroBg.style.transform = `scale(${zoom})`;
     });
-
-    // News Carousel
-    const track = document.getElementById('newsTrack');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const dotsContainer = document.getElementById('carouselDots');
-    
-    let currentIndex = 0;
-    let autoRotateInterval;
-
-    for (let i = 0; i < 2; i++) {
-      const dot = document.createElement('button');
-      dot.classList.add('carousel-dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goToSlide(i));
-      dotsContainer.appendChild(dot);
-    }
-
-    const dots = document.querySelectorAll('.carousel-dot');
-
-    function updateCarousel() {
-      const offset = -currentIndex * 600;
-      track.style.transform = `translateY(${offset}px)`;
-      
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentIndex);
-      });
-    }
-
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % 2;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + 2) % 2;
-      updateCarousel();
-    }
-
-    function goToSlide(index) {
-      currentIndex = index;
-      updateCarousel();
-      resetAutoRotate();
-    }
-
-    function startAutoRotate() {
-      autoRotateInterval = setInterval(nextSlide, 4000);
-    }
-
-    function resetAutoRotate() {
-      clearInterval(autoRotateInterval);
-      startAutoRotate();
-    }
-
-    prevBtn.addEventListener('click', () => {
-      prevSlide();
-      resetAutoRotate();
-    });
-
-    nextBtn.addEventListener('click', () => {
-      nextSlide();
-      resetAutoRotate();
-    });
-
-    startAutoRotate();
 
     // Merch Carousel
     const merchTrack = document.getElementById('merchTrack');
