@@ -27,7 +27,7 @@
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background-color: #C92828; border-radius: 5px; }
+    ::-webkit-scrollbar-thumb { background-color: #C92828; border-radius: 0; }
 
     body {
       font-family: 'Montserrat', sans-serif;
@@ -109,7 +109,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: stretch;
-      min-height: 110vh;
+      min-height: 130vh;
       border-bottom: 2px solid #C92828;
       position: relative;
       overflow: hidden;
@@ -148,7 +148,7 @@
     .hero-left {
       position: relative;
       z-index: 3;
-      flex: 1 1 55%;
+      flex: 1 1 60%;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -185,16 +185,16 @@
     .hero-right {
       position: relative;
       z-index: 3;
-      flex: 1 1 35%;
+      flex: 1 1 25%;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: flex-end;
     }
 
     .news-carousel-section {
       position: relative;
       z-index: 2;
-      width: 380px;
+      width: 320px;
       flex-shrink: 0;
     }
 
@@ -205,6 +205,24 @@
       backdrop-filter: blur(15px);
       position: relative;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .news-carousel-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('roninbg.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%) brightness(0.7);
+      opacity: 0.03;
+      z-index: 0;
+    }
+
+    .news-carousel-wrapper * {
+      position: relative;
+      z-index: 1;
     }
 
     .news-carousel-header {
@@ -391,78 +409,245 @@
       background: #C92828;
     }
 
-    /* Stats Section */
-    #stats {
-      background: #0a0a0a;
-      padding: 100px 50px;
-      border-top: 2px solid #C92828;
+    /* Merch Section */
+    #merch {
       position: relative;
+      background: #0a0a0a;
+      padding: 80px 0;
+      border-top: 2px solid #C92828;
       overflow: hidden;
     }
 
-    #stats::before {
-      content: "";
+    .merch-header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 0 50px;
+    }
+
+    .merch-header h2 {
+      font-family: 'TheLastShuriken';
+      font-size: 48px;
+      color: #C92828;
+      margin-bottom: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .merch-header p {
+      font-family: 'Montserrat';
+      font-size: 16px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .merch-display {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      padding: 0 50px;
+    }
+
+    .merch-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      gap: 0;
+    }
+
+    .merch-item {
+      min-width: 100%;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+      border: 1px solid rgba(201, 40, 40, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      flex-shrink: 0;
+    }
+
+    .merch-item::before {
+      content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(201, 40, 40, 0.03) 0%, transparent 100%);
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, transparent, rgba(201, 40, 40, 0.3), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
       z-index: 0;
     }
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .merch-item:hover::before {
+      opacity: 1;
+    }
+
+    .merch-item:hover {
+      border-color: #C92828;
+    }
+
+    .merch-item-image {
+      width: 100%;
+      height: 500px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      border-bottom: 1px solid rgba(201, 40, 40, 0.3);
+    }
+
+    .merch-item-tag {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      background: #C92828;
+      color: white;
+      padding: 8px 20px;
+      font-family: 'Montserrat';
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+      z-index: 2;
+    }
+
+    .merch-item-content {
+      padding: 40px 30px;
       position: relative;
       z-index: 1;
     }
 
-    .stat-card {
-      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-      border: 1px solid rgba(201, 40, 40, 0.3);
-      padding: 40px 30px;
-      text-align: center;
-      position: relative;
-      transition: all 0.4s ease;
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #C92828, transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    .stat-card:hover::before {
-      opacity: 1;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-5px);
-      border-color: #C92828;
-    }
-
-    .stat-number {
-      font-family: 'TheLastShuriken';
-      font-size: 56px;
-      color: #C92828;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-    }
-
-    .stat-label {
+    .merch-item-category {
       font-family: 'Montserrat';
-      font-size: 14px;
-      color: #999;
+      font-size: 12px;
+      color: #C92828;
       text-transform: uppercase;
       letter-spacing: 2px;
+      margin-bottom: 12px;
       font-weight: 600;
+    }
+
+    .merch-item-title {
+      font-family: 'TheLastShuriken';
+      font-size: 32px;
+      color: #fff;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .merch-item-price {
+      font-family: 'Montserrat';
+      font-size: 28px;
+      color: #C92828;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .merch-item-specs {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(201, 40, 40, 0.2);
+    }
+
+    .merch-spec {
+      font-family: 'Montserrat';
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .merch-spec span {
+      display: block;
+      color: #C92828;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+
+    .merch-item-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid #C92828;
+      color: #C92828;
+      padding: 14px 35px;
+      font-family: 'Montserrat';
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .merch-item-btn:hover {
+      background: #C92828;
+      color: #fff;
+    }
+
+    .merch-item-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .merch-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(201, 40, 40, 0.1);
+      border: 1px solid #C92828;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      z-index: 3;
+    }
+
+    .merch-nav:hover {
+      background: #C92828;
+    }
+
+    .merch-nav.prev { left: 0; }
+    .merch-nav.next { right: 0; }
+
+    .merch-nav svg {
+      width: 24px;
+      height: 24px;
+      fill: #C92828;
+      transition: fill 0.3s;
+    }
+
+    .merch-nav:hover svg {
+      fill: #fff;
+    }
+
+    .merch-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 50px;
+    }
+
+    .merch-indicator {
+      width: 40px;
+      height: 3px;
+      background: rgba(201, 40, 40, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .merch-indicator.active {
+      background: #C92828;
+      width: 60px;
     }
 
     /* About Section */
@@ -729,246 +914,6 @@
       color: #fff;
     }
 
-    /* Merch Section - Futuristic Corporate */
-    #merch {
-      position: relative;
-      background: #0a0a0a;
-      padding: 120px 50px;
-      border-top: 2px solid #C92828;
-      overflow: hidden;
-    }
-
-    .merch-header {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .merch-header h2 {
-      font-family: 'TheLastShuriken';
-      font-size: 48px;
-      color: #C92828;
-      margin-bottom: 15px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .merch-header p {
-      font-family: 'Montserrat';
-      font-size: 16px;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .merch-display {
-      max-width: 1400px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .merch-track {
-      display: flex;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      gap: 40px;
-    }
-
-    .merch-item {
-      min-width: calc(33.333% - 27px);
-      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-      border: 1px solid rgba(201, 40, 40, 0.3);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      flex-shrink: 0;
-    }
-
-    .merch-item::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, transparent, rgba(201, 40, 40, 0.3), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
-      z-index: 0;
-    }
-
-    .merch-item:hover::before {
-      opacity: 1;
-    }
-
-    .merch-item:hover {
-      border-color: #C92828;
-      transform: translateY(-5px);
-    }
-
-    .merch-item-image {
-      width: 100%;
-      height: 400px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      border-bottom: 1px solid rgba(201, 40, 40, 0.3);
-    }
-
-    .merch-item-tag {
-      position: absolute;
-      top: 20px;
-      left: 0;
-      background: #C92828;
-      color: white;
-      padding: 8px 20px;
-      font-family: 'Montserrat';
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
-      z-index: 2;
-    }
-
-    .merch-item-content {
-      padding: 40px 30px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .merch-item-category {
-      font-family: 'Montserrat';
-      font-size: 12px;
-      color: #C92828;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .merch-item-title {
-      font-family: 'TheLastShuriken';
-      font-size: 32px;
-      color: #fff;
-      margin-bottom: 15px;
-      letter-spacing: 2px;
-    }
-
-    .merch-item-price {
-      font-family: 'Montserrat';
-      font-size: 28px;
-      color: #C92828;
-      margin-bottom: 25px;
-      font-weight: 600;
-    }
-
-    .merch-item-specs {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 25px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(201, 40, 40, 0.2);
-    }
-
-    .merch-spec {
-      font-family: 'Montserrat';
-      font-size: 11px;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .merch-spec span {
-      display: block;
-      color: #C92828;
-      font-weight: 600;
-      margin-top: 5px;
-    }
-
-    .merch-item-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      border: 1px solid #C92828;
-      color: #C92828;
-      padding: 14px 35px;
-      font-family: 'Montserrat';
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .merch-item-btn:hover {
-      background: #C92828;
-      color: #fff;
-    }
-
-    .merch-item-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-
-    .merch-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
-      background: rgba(201, 40, 40, 0.1);
-      border: 1px solid #C92828;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      z-index: 3;
-    }
-
-    .merch-nav:hover {
-      background: #C92828;
-    }
-
-    .merch-nav.prev { left: -25px; }
-    .merch-nav.next { right: -25px; }
-
-    .merch-nav svg {
-      width: 24px;
-      height: 24px;
-      fill: #C92828;
-      transition: fill 0.3s;
-    }
-
-    .merch-nav:hover svg {
-      fill: #fff;
-    }
-
-    .merch-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 50px;
-    }
-
-    .merch-indicator {
-      width: 40px;
-      height: 3px;
-      background: rgba(201, 40, 40, 0.3);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .merch-indicator.active {
-      background: #C92828;
-      width: 60px;
-    }
-
     /* Footer */
     footer {
       padding: 4rem 5% 2rem;
@@ -1117,10 +1062,6 @@
         grid-template-columns: 1fr;
         gap: 2rem;
       }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
@@ -1216,23 +1157,118 @@
     </div>
   </section>
 
-  <section id="stats" class="fade-up">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">Active Players</div>
+  <section id="merch" class="fade-up">
+    <div class="merch-header">
+      <h2>Official Merchandise</h2>
+      <p>Premium Quality Apparel</p>
+    </div>
+    <div class="merch-display">
+      <div class="merch-track" id="merchTrack">
+        <div class="merch-item">
+          <div class="merch-item-image" style="background-image: url('https://placehold.co/1200x500/1a1a1a/C92828?text=Pro+Jersey+2026');">
+            <div class="merch-item-tag">NEW RELEASE</div>
+          </div>
+          <div class="merch-item-content">
+            <div class="merch-item-category">JERSEYS</div>
+            <div class="merch-item-title">Pro Jersey 2026</div>
+            <div class="merch-item-price">$49.99</div>
+            <div class="merch-item-specs">
+              <div class="merch-spec">
+                Material
+                <span>PREMIUM</span>
+              </div>
+              <div class="merch-spec">
+                Fit
+                <span>ATHLETIC</span>
+              </div>
+              <div class="merch-spec">
+                Stock
+                <span>LIMITED</span>
+              </div>
+            </div>
+            <a href="shop.html" class="merch-item-btn">
+              VIEW PRODUCT
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="merch-item">
+          <div class="merch-item-image" style="background-image: url('https://placehold.co/1200x500/1a1a1a/C92828?text=Ronin+Hoodie');">
+            <div class="merch-item-tag">COMING SOON</div>
+          </div>
+          <div class="merch-item-content">
+            <div class="merch-item-category">APPAREL</div>
+            <div class="merch-item-title">Ronin Hoodie</div>
+            <div class="merch-item-price">$59.99</div>
+            <div class="merch-item-specs">
+              <div class="merch-spec">
+                Material
+                <span>COTTON</span>
+              </div>
+              <div class="merch-spec">
+                Fit
+                <span>REGULAR</span>
+              </div>
+              <div class="merch-spec">
+                Stock
+                <span>PRE-ORDER</span>
+              </div>
+            </div>
+            <a href="shop.html" class="merch-item-btn">
+              VIEW PRODUCT
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="merch-item">
+          <div class="merch-item-image" style="background-image: url('https://placehold.co/1200x500/1a1a1a/C92828?text=Ronin+Tee');">
+            <div class="merch-item-tag">COMING SOON</div>
+          </div>
+          <div class="merch-item-content">
+            <div class="merch-item-category">APPAREL</div>
+            <div class="merch-item-title">Ronin Tee</div>
+            <div class="merch-item-price">$24.99</div>
+            <div class="merch-item-specs">
+              <div class="merch-spec">
+                Material
+                <span>COTTON</span>
+              </div>
+              <div class="merch-spec">
+                Fit
+                <span>REGULAR</span>
+              </div>
+              <div class="merch-spec">
+                Stock
+                <span>PRE-ORDER</span>
+              </div>
+            </div>
+            <a href="shop.html" class="merch-item-btn">
+              VIEW PRODUCT
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-number">$100K+</div>
-        <div class="stat-label">Prize Winnings</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">15+</div>
-        <div class="stat-label">Partner Brands</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">1M+</div>
-        <div class="stat-label">Community Reach</div>
+      <button class="merch-nav prev" id="merchPrev">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+      <button class="merch-nav next" id="merchNext">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+      <div class="merch-indicators">
+        <div class="merch-indicator active"></div>
+        <div class="merch-indicator"></div>
+        <div class="merch-indicator"></div>
       </div>
     </div>
   </section>
@@ -1288,7 +1324,7 @@
 
   <section id="competitive" class="fade-up">
     <div class="competitive-header">
-      <h2>Competitive Excellence</h2>
+      <h2>Divisions</h2>
       <p>Ronin competes at the highest level across multiple disciplines, maintaining a presence in premier tournaments and leagues worldwide.</p>
     </div>
     <div class="competitive-grid">
@@ -1301,127 +1337,6 @@
         <h3>Content Creation</h3>
         <p>Professional content creators building audiences and strengthening the Ronin brand across YouTube, Twitch, and TikTok platforms.</p>
         <a href="team.html">MEET CREATORS</a>
-      </div>
-      <div class="competitive-item">
-        <h3>Community Tournaments</h3>
-        <p>Regular customs and community events with cash prizes, streamed live to thousands. Accessible competition for all skill levels.</p>
-        <a href="compete.html">LEARN MORE</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="merch" class="fade-up">
-    <div class="merch-header">
-      <h2>Official Merchandise</h2>
-      <p>Premium Quality Apparel</p>
-    </div>
-    <div class="merch-display">
-      <div class="merch-track" id="merchTrack">
-        <div class="merch-item">
-          <div class="merch-item-image" style="background-image: url('Coming soon.png');">
-            <div class="merch-item-tag">NEW RELEASE</div>
-          </div>
-          <div class="merch-item-content">
-            <div class="merch-item-category">JERSEYS</div>
-            <div class="merch-item-title">Pro Jersey 2026</div>
-            <div class="merch-item-price">$49.99</div>
-            <div class="merch-item-specs">
-              <div class="merch-spec">
-                Material
-                <span>PREMIUM</span>
-              </div>
-              <div class="merch-spec">
-                Fit
-                <span>ATHLETIC</span>
-              </div>
-              <div class="merch-spec">
-                Stock
-                <span>LIMITED</span>
-              </div>
-            </div>
-            <a href="shop.html" class="merch-item-btn">
-              VIEW PRODUCT
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="merch-item">
-          <div class="merch-item-image" style="background-image: url('Coming soon.png');">
-            <div class="merch-item-tag">COMING SOON</div>
-          </div>
-          <div class="merch-item-content">
-            <div class="merch-item-category">APPAREL</div>
-            <div class="merch-item-title">Ronin Hoodie</div>
-            <div class="merch-item-price">$59.99</div>
-            <div class="merch-item-specs">
-              <div class="merch-spec">
-                Material
-                <span>COTTON</span>
-              </div>
-              <div class="merch-spec">
-                Fit
-                <span>REGULAR</span>
-              </div>
-              <div class="merch-spec">
-                Stock
-                <span>PRE-ORDER</span>
-              </div>
-            </div>
-            <a href="shop.html" class="merch-item-btn">
-              VIEW PRODUCT
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="merch-item">
-          <div class="merch-item-image" style="background-image: url('Coming soon.png');">
-            <div class="merch-item-tag">COMING SOON</div>
-          </div>
-          <div class="merch-item-content">
-            <div class="merch-item-category">APPAREL</div>
-            <div class="merch-item-title">Ronin Tee</div>
-            <div class="merch-item-price">$24.99</div>
-            <div class="merch-item-specs">
-              <div class="merch-spec">
-                Material
-                <span>COTTON</span>
-              </div>
-              <div class="merch-spec">
-                Fit
-                <span>REGULAR</span>
-              </div>
-              <div class="merch-spec">
-                Stock
-                <span>PRE-ORDER</span>
-              </div>
-            </div>
-            <a href="shop.html" class="merch-item-btn">
-              VIEW PRODUCT
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-      <button class="merch-nav prev" id="merchPrev">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-        </svg>
-      </button>
-      <button class="merch-nav next" id="merchNext">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-        </svg>
-      </button>
-      <div class="merch-indicators">
-        <div class="merch-indicator active"></div>
-        <div class="merch-indicator"></div>
-        <div class="merch-indicator"></div>
       </div>
     </div>
   </section>
@@ -1491,12 +1406,12 @@
     }, { threshold: 0.2 });
     fadeUps.forEach(el => observer.observe(el));
 
-    // Smooth hero background zoom on scroll
+    // More exaggerated hero background zoom on scroll
     const heroBg = document.querySelector('.hero-bg');
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
-      const maxZoom = 1.15;
-      const zoom = 1 + Math.min(scrollY / 1500, maxZoom - 1);
+      const maxZoom = 1.25;
+      const zoom = 1 + Math.min(scrollY / 1200, maxZoom - 1);
       heroBg.style.transform = `scale(${zoom})`;
     });
 
@@ -1575,7 +1490,7 @@
     const totalItems = 3;
 
     function updateMerchCarousel() {
-      const itemWidth = merchTrack.querySelector('.merch-item').offsetWidth + 40;
+      const itemWidth = merchTrack.querySelector('.merch-item').offsetWidth;
       merchTrack.style.transform = `translateX(-${merchIndex * itemWidth}px)`;
       
       merchIndicators.forEach((indicator, index) => {
@@ -1608,4 +1523,3 @@
   </script>
 </body>
 </html>
-      position:
