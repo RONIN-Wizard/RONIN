@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RONIN</title>
 
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
   <link rel="shortcut icon" href="favicon.ico?v=2">
   <link rel="apple-touch-icon" href="RONIN_Logo.png?v=2">
   <meta name="theme-color" content="#C92828">
 
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -25,14 +27,15 @@
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background-color: #C92828; border-radius: 0; }
+    ::-webkit-scrollbar-thumb { background-color: #C92828; border-radius: 5px; }
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #0a0a0a;
+      background-color: #141414;
       color: white;
     }
 
+    /* Fade-up animation */
     .fade-up {
       opacity: 0;
       transform: translateY(40px);
@@ -101,231 +104,302 @@
     }
     nav.nav-links a:hover { color: #000; }
 
-    /* HERO SECTION */
     #hero {
-      margin-top: 89px;
-      min-height: 85vh;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: stretch;
+      min-height: 90vh;
+      border-bottom: 2px solid #C92828;
       position: relative;
       overflow: hidden;
+      padding: 120px 5% 80px;
+      gap: 6rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
       background: url('RoninHero.webp') center center / cover no-repeat;
-      display: flex;
-      align-items: center;
-      padding: 60px 50px;
-      border-bottom: 2px solid #C92828;
+      transform-origin: center;
+      transform: scale(1);
+      z-index: 0;
+      will-change: transform;
+      transition: transform 0.2s ease-out;
     }
 
     #hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 0.40);
       z-index: 1;
     }
 
-    .hero-content {
-      position: relative;
+    #hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0) 100%);
       z-index: 2;
-      max-width: 1400px;
-      margin: 0 auto;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 80px;
+      pointer-events: none;
     }
 
     .hero-left {
-      flex: 1;
-      max-width: 650px;
+      position: relative;
+      z-index: 3;
+      flex: 1 1 55%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: white;
+      text-shadow: 0 0 15px rgba(0,0,0,0.7);
     }
-
     .hero-left h1 {
       font-family: 'TheLastShuriken';
-      font-size: 72px;
+      font-size: 60px;
       color: #C92828;
-      margin-bottom: 25px;
-      letter-spacing: 3px;
-      text-shadow: 2px 2px 12px rgba(0,0,0,0.9);
+      margin-bottom: 15px;
     }
-    
     .hero-left p {
       font-family: 'Montserrat';
-      font-size: 19px;
+      font-size: 18px;
       color: #eee;
-      margin-bottom: 35px;
-      line-height: 1.7;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
+      margin-bottom: 25px;
+      max-width: 600px;
     }
-    
     .read-more {
       display: inline-block;
       background: #C92828;
       color: white;
       font-family: 'Montserrat';
       text-decoration: none;
-      padding: 15px 40px;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      transition: all 0.3s;
-      border: 2px solid #C92828;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background 0.3s;
+      width: auto;
+      align-self: flex-start;
     }
-    
-    .read-more:hover { 
-      background: transparent;
-      color: #C92828;
-    }
+    .read-more:hover { background: #a71e1e; }
 
-    /* NEWS CAROUSEL */
     .hero-right {
-      flex: 0 0 380px;
+      position: relative;
+      z-index: 3;
+      flex: 1 1 35%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
     }
 
     .news-carousel-section {
-      background: linear-gradient(135deg, rgba(238, 238, 238, 0.97) 0%, rgba(230, 230, 230, 0.97) 100%);
-      border: 2px solid #C92828;
-      backdrop-filter: blur(15px);
       position: relative;
-      overflow: hidden;
+      z-index: 2;
+      width: 420px;
+      flex-shrink: 0;
     }
 
-    .news-carousel-section::before {
-      content: "";
+    .news-carousel-wrapper {
+      background: linear-gradient(135deg, rgba(11, 14, 17, 0.7) 0%, rgba(15, 20, 25, 0.7) 100%);
+      border: 1px solid rgba(201, 40, 40, 0.5);
+      overflow: hidden;
+      backdrop-filter: blur(15px);
+      position: relative;
+      outline: 1px solid rgba(201, 40, 40, 0.2);
+      outline-offset: 4px;
+    }
+
+    .news-carousel-wrapper::before {
+      content: '';
       position: absolute;
-      inset: 0;
-      background-image: url('roninbg.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      filter: grayscale(100%) brightness(0.7);
-      opacity: 0.04;
+      top: -100%;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, rgba(201, 40, 40, 0.03), transparent);
+      animation: scan 8s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes scan {
+      0% { top: -100%; }
+      100% { top: 200%; }
+    }
+
+    .news-carousel-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201, 40, 40, 0.03) 2px, rgba(201, 40, 40, 0.03) 4px);
+      pointer-events: none;
       z-index: 0;
     }
 
     .news-carousel-header {
+      background: linear-gradient(135deg, rgba(11, 14, 17, 0.98) 0%, rgba(15, 20, 25, 0.98) 100%);
+      padding: 1.2rem;
+      border-bottom: 2px solid #C92828;
       position: relative;
-      z-index: 1;
-      padding: 24px;
-      border-bottom: 2px solid rgba(201, 40, 40, 0.2);
-      text-align: center;
+      z-index: 2;
     }
 
     .news-carousel-header h3 {
-      font-family: 'TheLastShuriken';
-      font-size: 26px;
+      font-size: 1.1rem;
+      font-weight: 700;
       color: #C92828;
-      letter-spacing: 3px;
       text-transform: uppercase;
+      letter-spacing: 3px;
+      text-align: center;
+      font-family: 'TheLastShuriken';
     }
 
-    .news-cards-wrapper {
-      position: relative;
-      height: 380px;
+    .news-carousel-container {
+      height: 600px;
       overflow: hidden;
+      position: relative;
+      background: #0B0E11;
     }
 
-    .news-cards-track {
-      position: relative;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    .news-carousel-track {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.6s ease-in-out;
     }
 
     .news-card {
-      position: relative;
-      z-index: 1;
-      padding: 30px 28px;
-      height: 380px;
+      min-height: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, rgba(11, 14, 17, 0.95) 0%, rgba(8, 10, 12, 0.95) 100%);
+      border-bottom: 1px solid rgba(201, 40, 40, 0.2);
       display: flex;
       flex-direction: column;
+      flex-shrink: 0;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .news-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, #C92828 0%, rgba(201, 40, 40, 0.3) 100%);
+      z-index: 3;
+    }
+
+    .news-card-image {
+      width: 100%;
+      height: 120px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      border-bottom: 1px solid rgba(201, 40, 40, 0.3);
+    }
+
+    .news-card-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(11, 14, 17, 0.8) 100%);
+    }
+
+    .news-card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+      z-index: 2;
     }
 
     .news-card-date {
-      font-family: 'Montserrat';
-      font-size: 11px;
+      font-size: 0.7rem;
       color: #C92828;
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 2.5px;
-      margin-bottom: 16px;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      font-family: 'Montserrat';
     }
 
     .news-card-title {
-      font-family: 'Montserrat';
-      font-size: 20px;
-      font-weight: 700;
-      color: #000;
-      margin-bottom: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #E6E8EB;
+      margin-bottom: 1rem;
       line-height: 1.4;
-      letter-spacing: 0.3px;
-    }
-
-    .news-card-excerpt {
+      letter-spacing: 0.5px;
       font-family: 'Montserrat';
-      font-size: 14px;
-      color: #333;
-      line-height: 1.7;
-      margin-bottom: 24px;
-      flex-grow: 1;
     }
 
     .news-card-footer {
+      margin-top: auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: auto;
-      gap: 12px;
     }
 
     .news-card-category {
-      font-family: 'Montserrat';
-      font-size: 10px;
-      font-weight: 700;
+      display: inline-block;
+      background: transparent;
+      border: 1px solid #C92828;
       color: #C92828;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.65rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      border: 1.5px solid #C92828;
-      padding: 7px 14px;
-      white-space: nowrap;
+      letter-spacing: 1.5px;
+      font-family: 'Montserrat';
     }
 
     .news-card-read-more {
-      font-family: 'Montserrat';
       background: transparent;
-      border: 1.5px solid rgba(201, 40, 40, 0.6);
+      border: 1px solid rgba(201, 40, 40, 0.5);
       color: #C92828;
-      padding: 7px 20px;
-      font-size: 10px;
-      font-weight: 700;
+      padding: 0.35rem 1rem;
+      font-size: 0.65rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       cursor: pointer;
       transition: all 0.3s;
-      white-space: nowrap;
+      font-family: 'Montserrat';
     }
 
     .news-card-read-more:hover {
       background: #C92828;
-      color: #fff;
+      color: #0B0E11;
       border-color: #C92828;
     }
 
-    .news-carousel-controls {
-      position: relative;
-      z-index: 1;
+    .carousel-controls {
       display: flex;
       justify-content: center;
-      gap: 14px;
-      padding: 22px;
-      border-top: 2px solid rgba(201, 40, 40, 0.2);
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(11, 14, 17, 0.98) 0%, rgba(15, 20, 25, 0.98) 100%);
+      border-top: 1px solid rgba(201, 40, 40, 0.3);
+      position: relative;
+      z-index: 2;
     }
 
-    .news-carousel-arrow {
+    .carousel-arrow {
       background: transparent;
-      border: 1.5px solid #C92828;
+      border: 1px solid #C92828;
       color: #C92828;
-      width: 42px;
-      height: 42px;
-      font-size: 15px;
+      width: 35px;
+      height: 35px;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s;
       font-weight: 700;
@@ -334,203 +408,30 @@
       justify-content: center;
     }
 
-    .news-carousel-arrow:hover:not(:disabled) {
+    .carousel-arrow:hover {
       background: #C92828;
-      color: #fff;
+      color: #0B0E11;
     }
 
-    .news-carousel-arrow:disabled {
-      opacity: 0.25;
-      cursor: not-allowed;
-    }
-
-    /* Merch Section */
-    #merch {
-      position: relative;
-      background: #0a0a0a;
-      padding: 80px 50px;
-      border-top: 2px solid #C92828;
-      overflow: hidden;
-    }
-
-    .merch-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .merch-header h2 {
-      font-family: 'TheLastShuriken';
-      font-size: 48px;
-      color: #C92828;
-      margin-bottom: 15px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .merch-header p {
-      font-family: 'Montserrat';
-      font-size: 16px;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .merch-display {
-      max-width: 1400px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .merch-track {
+    .carousel-dots {
       display: flex;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      gap: 0;
+      gap: 0.5rem;
     }
 
-    .merch-item {
-      min-width: 100%;
-      background: #000;
-      position: relative;
-      overflow: hidden;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      padding: 80px;
-      gap: 80px;
-    }
-
-    .merch-item-left {
-      flex: 0 0 45%;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .merch-item-category {
-      font-family: 'Montserrat';
-      font-size: 12px;
-      color: #C92828;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 600;
-    }
-
-    .merch-item-title {
-      font-family: 'TheLastShuriken';
-      font-size: 48px;
-      color: #fff;
-      letter-spacing: 2px;
-      line-height: 1.1;
-    }
-
-    .merch-item-price {
-      font-family: 'Montserrat';
-      font-size: 32px;
-      color: #C92828;
-      font-weight: 600;
-    }
-
-    .merch-item-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #C92828;
-      border: none;
-      color: #fff;
-      padding: 14px 35px;
-      font-family: 'Montserrat';
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-      width: fit-content;
-      justify-content: center;
-    }
-
-    .merch-item-btn:hover {
-      background: #a71e1e;
-    }
-
-    .merch-item-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-
-    .merch-item-right {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .merch-item-image {
-      width: 100%;
-      height: 600px;
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-color: #1a1a1a;
-    }
-
-    .merch-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
-      background: rgba(201, 40, 40, 0.1);
-      border: 1px solid #C92828;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      z-index: 3;
-    }
-
-    .merch-nav:hover {
-      background: #C92828;
-    }
-
-    .merch-nav.prev { left: 20px; }
-    .merch-nav.next { right: 20px; }
-
-    .merch-nav svg {
-      width: 24px;
-      height: 24px;
-      fill: #C92828;
-      transition: fill 0.3s;
-    }
-
-    .merch-nav:hover svg {
-      fill: #fff;
-    }
-
-    .merch-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 50px;
-    }
-
-    .merch-indicator {
-      width: 40px;
-      height: 3px;
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 0;
       background: rgba(201, 40, 40, 0.3);
+      border: none;
       cursor: pointer;
       transition: all 0.3s;
     }
 
-    .merch-indicator.active {
+    .carousel-dot.active {
       background: #C92828;
-      width: 60px;
     }
 
-    /* About Section */
     #about {
       display: flex;
       align-items: center;
@@ -573,269 +474,263 @@
     .about-logo { flex: 1 1 300px; display: flex; justify-content: center; align-items: center; }
     .about-logo img { max-width: 280px; }
 
-    /* Vision Section */
-    #vision {
-      background: #0a0a0a;
-      padding: 120px 50px;
+    #customs {
+      background: #141414;
       border-top: 2px solid #C92828;
+      padding: 120px 50px;
       position: relative;
       overflow: hidden;
-    }
-
-    .vision-header {
       text-align: center;
-      margin-bottom: 80px;
     }
 
-    .vision-header h2 {
+    #customs::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('roninbg.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%) brightness(0.7);
+      opacity: 0.03;
+      z-index: 0;
+    }
+
+    #customs * { position: relative; z-index: 1; }
+
+    #customs h2 {
       font-family: 'TheLastShuriken';
       font-size: 48px;
       color: #C92828;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
       letter-spacing: 3px;
-      text-transform: uppercase;
     }
 
-    .vision-header p {
+    #customs .customs-subtitle {
       font-family: 'Montserrat';
-      font-size: 16px;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 50px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+      display: none;
     }
 
-    .vision-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 50px;
+    #customs .customs-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
     }
 
-    .vision-card {
-      background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-      border: 1px solid rgba(201, 40, 40, 0.3);
-      padding: 50px 40px;
-      position: relative;
+    #customs .customs-feature {
+      flex: 1 1 300px;
+      max-width: 350px;
+      background: #eeeeee;
+      border: 2px solid #C92828;
+      border-radius: 15px;
+      padding: 40px 30px;
       transition: all 0.4s ease;
     }
 
-    .vision-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: #C92828;
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
+    #customs .customs-feature:hover {
+      transform: translateY(-10px);
+      background: #e0e0e0;
+      box-shadow: 0 10px 30px rgba(201, 40, 40, 0.3);
     }
 
-    .vision-card:hover::after {
-      transform: scaleX(1);
-    }
-
-    .vision-card:hover {
-      border-color: #C92828;
-      transform: translateY(-5px);
-    }
-
-    .vision-icon {
-      width: 60px;
-      height: 60px;
-      background: rgba(201, 40, 40, 0.1);
-      border: 2px solid #C92828;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 25px;
-    }
-
-    .vision-icon svg {
-      width: 30px;
-      height: 30px;
-      fill: #C92828;
-    }
-
-    .vision-card h3 {
+    #customs .customs-feature h3 {
       font-family: 'TheLastShuriken';
       font-size: 28px;
       color: #C92828;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
+      margin-bottom: 15px;
     }
 
-    .vision-card p {
+    #customs .customs-feature p {
       font-family: 'Montserrat';
       font-size: 16px;
-      color: #ccc;
-      line-height: 1.8;
+      color: #000;
+      line-height: 1.7;
     }
 
-    /* Competitive Section */
-    #competitive {
-      background: #eeeeee;
-      padding: 120px 50px;
-      border-top: 2px solid #C92828;
+    #customs .customs-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #C92828;
+      color: white;
+      font-family: 'TheLastShuriken';
+      text-decoration: none;
+      padding: 18px 40px;
+      border-radius: 10px;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(201, 40, 40, 0.4);
+    }
+
+    #customs .customs-cta:hover {
+      background: #a71e1e;
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(201, 40, 40, 0.6);
+    }
+
+    #customs .customs-cta:nth-child(2):hover {
+      background: #772ce8 !important;
+    }
+
+    #customs .customs-cta svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    #customs .customs-content + a {
+      margin-right: 20px;
+    }
+
+    #merch {
       position: relative;
+      height: 100vh;
+      width: 100%;
       overflow: hidden;
+      border-top: 2px solid #C92828;
+      background: #141414;
     }
 
-    #competitive::before {
-      content: "";
+    .merch-full {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    .merch-slide {
       position: absolute;
       inset: 0;
-      background-image: url('roninbg.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      filter: grayscale(100%) brightness(0.7);
-      opacity: 0.03;
-      z-index: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 120px;
+      opacity: 0;
+      transition: opacity 0.8s ease;
     }
 
-    #competitive * { position: relative; z-index: 1; }
-
-    .competitive-header {
-      text-align: center;
-      margin-bottom: 80px;
+    .merch-slide.active {
+      opacity: 1;
     }
 
-    .competitive-header h2 {
-      font-family: 'TheLastShuriken';
-      font-size: 48px;
+    .merch-info {
+      z-index: 2;
+      flex: 1;
+    }
+
+    .merch-category {
+      font-family: 'Montserrat';
+      font-size: 14px;
+      font-weight: 600;
       color: #C92828;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .merch-info h3 {
+      font-family: 'TheLastShuriken';
+      font-size: 72px;
+      color: #fff;
       margin-bottom: 15px;
-      letter-spacing: 3px;
       text-transform: uppercase;
     }
 
-    .competitive-header p {
+    .merch-price {
       font-family: 'Montserrat';
-      font-size: 16px;
-      color: #333;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-
-    .competitive-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-    }
-
-    .competitive-item {
-      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-      border: 2px solid rgba(201, 40, 40, 0.3);
-      padding: 0;
-      text-align: center;
-      position: relative;
-      transition: all 0.4s ease;
-      overflow: hidden;
-    }
-
-    .competitive-item-image {
-      width: 100%;
-      height: 200px;
-      background-size: cover;
-      background-position: center;
-      border-bottom: 2px solid rgba(201, 40, 40, 0.3);
-    }
-
-    .competitive-item-content {
-      padding: 50px 40px;
-    }
-
-    .competitive-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: #C92828;
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
-    }
-
-    .competitive-item:hover::before {
-      transform: scaleX(1);
-    }
-
-    .competitive-item:hover {
-      border-color: #C92828;
-      transform: translateY(-5px);
-    }
-
-    .competitive-item h3 {
-      font-family: 'TheLastShuriken';
       font-size: 32px;
+      font-weight: 600;
       color: #C92828;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-    }
-
-    .competitive-item p {
-      font-family: 'Montserrat';
-      font-size: 15px;
-      color: #333;
-      line-height: 1.8;
       margin-bottom: 25px;
     }
 
-    .competitive-item a {
-      display: inline-block;
-      background: transparent;
-      border: 2px solid #C92828;
-      color: #C92828;
-      padding: 12px 30px;
-      font-family: 'Montserrat';
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .competitive-item a:hover {
+    .merch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       background: #C92828;
       color: #fff;
+      font-family: 'Montserrat';
+      font-weight: 600;
+      padding: 15px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.3s;
     }
 
-    /* Footer */
+    .merch-btn:hover { background: #a71e1e; }
+
+    .merch-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+
+    .merch-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .merch-image img {
+      width: 80%;
+      max-width: 700px;
+      border-radius: 14px;
+      border: 2px solid #C92828;
+    }
+
+    .merch-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 55px;
+      height: 55px;
+      background: #C92828;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(201, 40, 40, 0.4);
+      z-index: 3;
+    }
+
+    #merchPrev { left: 50px; }
+    #merchNext { right: 50px; }
+
+    .merch-nav:hover {
+      background: #a71e1e;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .merch-nav svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
     footer {
       padding: 4rem 5% 2rem;
-      background: #eeeeee;
-      color: #000;
-      border-top: 2px solid #C92828;
-      position: relative;
-      overflow: hidden;
+      background: #000;
+      color: #E6E8EB;
+      border-top: 1px solid rgba(201, 40, 40, 0.3);
     }
 
-    footer::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url('roninbg.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      filter: grayscale(100%) brightness(0.7);
-      opacity: 0.03;
-      z-index: 0;
-    }
-
-    footer * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .footer-content {
+    footer-content {
       max-width: 1400px;
       margin: 0 auto;
       display: grid;
@@ -860,7 +755,7 @@
 
     .footer-copyright {
       font-size: 0.85rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(230, 232, 235, 0.5);
       line-height: 1.6;
       letter-spacing: 0.5px;
       font-family: 'Montserrat';
@@ -886,7 +781,7 @@
     }
 
     .footer-section ul li a {
-      color: rgba(0, 0, 0, 0.7);
+      color: rgba(230, 232, 235, 0.6);
       text-decoration: none;
       font-size: 0.9rem;
       transition: color 0.3s;
@@ -919,32 +814,24 @@
     .social-links a:hover {
       border-color: #C92828;
       background: #C92828;
-      color: #fff;
+      color: #0B0E11;
     }
 
     @media (max-width: 1200px) {
-      .hero-content {
+      #hero {
         flex-direction: column;
-        gap: 50px;
+        gap: 4rem;
       }
 
-      .hero-right {
+      .news-carousel-section {
         width: 100%;
         max-width: 500px;
-      }
-
-      .vision-container {
-        grid-template-columns: 1fr;
-      }
-
-      .competitive-grid {
-        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 768px) {
       .hero-left h1 {
-        font-size: 52px;
+        font-size: 4rem;
       }
 
       .footer-content {
@@ -967,7 +854,7 @@
 
     <nav class="nav-links">
       <a href="/" class="active">Home</a>
-      <a href="compete.html">Compete</a>
+      <a href="partners.html">Partners</a>
       <a href="team.html">Team</a>
       <a href="news.html">News</a>
       <a href="shop.html">Shop</a>
@@ -975,144 +862,111 @@
   </header>
 
   <section id="hero">
-    <div class="hero-content">
-      <div class="hero-left">
-        <h1>A New Ronin</h1>
-        <p>Ronin Gaming steps into a new era with an expanded competitive lineup and refined brand vision.</p>
-        <a href="#" class="read-more">Read More</a>
-      </div>
+    <div class="hero-bg"></div>
+    <div class="hero-left">
+      <h1>A New Ronin</h1>
+      <p>Ronin Gaming steps into a new era with an expanded competitive lineup and refined brand vision.</p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
 
-      <div class="hero-right">
-        <div class="news-carousel-section">
+    <div class="hero-right">
+      <div class="news-carousel-section">
+        <div class="news-carousel-wrapper">
           <div class="news-carousel-header">
-            <h3>Latest News</h3>
+            <h3>LATEST</h3>
           </div>
-          
-          <div class="news-cards-wrapper">
-            <div class="news-cards-track" id="newsTrack">
+          <div class="news-carousel-container">
+            <div class="news-carousel-track" id="newsTrack">
               <div class="news-card">
-                <div class="news-card-date">15 JAN 26</div>
-                <div class="news-card-title">Ronin Announces New Partnership Deal</div>
-                <div class="news-card-excerpt">Strategic partnership expands organizational capabilities and strengthens player support infrastructure across all competitive divisions.</div>
-                <div class="news-card-footer">
-                  <div class="news-card-category">ANNOUNCEMENT</div>
-                  <button class="news-card-read-more">READ</button>
+                <div class="news-card-image" style="background-image: url('DSC00017.JPG');"></div>
+                <div class="news-card-content">
+                  <div class="news-card-date">16 OCT 25</div>
+                  <div class="news-card-title">Esports Expansion</div>
+                  <div class="news-card-footer">
+                    <div class="news-card-category">ANNOUNCEMENT</div>
+                    <button class="news-card-read-more">READ MORE</button>
+                  </div>
                 </div>
               </div>
-              
               <div class="news-card">
-                <div class="news-card-date">12 JAN 26</div>
-                <div class="news-card-title">Behind the Blade: Training with Ronin</div>
-                <div class="news-card-excerpt">An exclusive look inside the training regimen and daily operations that drive Ronin's competitive success and player development.</div>
-                <div class="news-card-footer">
-                  <div class="news-card-category">CONTENT</div>
-                  <button class="news-card-read-more">READ</button>
+                <div class="news-card-image" style="background-image: url('DSC00017.JPG');"></div>
+                <div class="news-card-content">
+                  <div class="news-card-date">11 OCT 25</div>
+                  <div class="news-card-title">New Partnership</div>
+                  <div class="news-card-footer">
+                    <div class="news-card-category">PARTNERS</div>
+                    <button class="news-card-read-more">READ MORE</button>
+                  </div>
                 </div>
               </div>
-              
               <div class="news-card">
-                <div class="news-card-date">8 JAN 26</div>
-                <div class="news-card-title">Ronin Secures Top 5 Finish at Major</div>
-                <div class="news-card-excerpt">Strong showing at international competition demonstrates continued growth and competitive excellence from the roster.</div>
-                <div class="news-card-footer">
-                  <div class="news-card-category">RESULTS</div>
-                  <button class="news-card-read-more">READ</button>
+                <div class="news-card-image" style="background-image: url('DSC00017.JPG');"></div>
+                <div class="news-card-content">
+                  <div class="news-card-date">3 OCT 25</div>
+                  <div class="news-card-title">Roster Update</div>
+                  <div class="news-card-footer">
+                    <div class="news-card-category">ROSTER</div>
+                    <button class="news-card-read-more">READ MORE</button>
+                  </div>
                 </div>
               </div>
-              
               <div class="news-card">
-                <div class="news-card-date">3 JAN 26</div>
-                <div class="news-card-title">New Year, New Goals for Ronin Gaming</div>
-                <div class="news-card-excerpt">Organization outlines strategic objectives and competitive targets for the 2026 season across all competitive divisions.</div>
-                <div class="news-card-footer">
-                  <div class="news-card-category">UPDATES</div>
-                  <button class="news-card-read-more">READ</button>
+                <div class="news-card-image" style="background-image: url('DSC00017.JPG');"></div>
+                <div class="news-card-content">
+                  <div class="news-card-date">28 SEP 25</div>
+                  <div class="news-card-title">Community Event</div>
+                  <div class="news-card-footer">
+                    <div class="news-card-category">COMMUNITY</div>
+                    <button class="news-card-read-more">READ MORE</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="news-carousel-controls">
-            <button class="news-carousel-arrow" id="newsUpBtn">▲</button>
-            <button class="news-carousel-arrow" id="newsDownBtn">▼</button>
+          <div class="carousel-controls">
+            <button class="carousel-arrow" id="prevBtn">▲</button>
+            <div class="carousel-dots" id="carouselDots"></div>
+            <button class="carousel-arrow" id="nextBtn">▼</button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="merch" class="fade-up">
-    <div class="merch-header">
-      <h2>Official Merchandise</h2>
-      <p>Premium Quality Apparel</p>
-    </div>
-    <div class="merch-display">
-      <div class="merch-track" id="merchTrack">
-        <div class="merch-item">
-          <div class="merch-item-left">
-            <div class="merch-item-category">JERSEYS</div>
-            <div class="merch-item-title">2026 RONIN<br>CUSTOM JERSEY</div>
-            <div class="merch-item-price">$79.99</div>
-            <a href="shop.html" class="merch-item-btn">
-              VIEW PRODUCT
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-              </svg>
-            </a>
-          </div>
-          <div class="merch-item-right">
-            <div class="merch-item-image" style="background-image: url('Coming soon.png');"></div>
-          </div>
-        </div>
-        <div class="merch-item">
-          <div class="merch-item-left">
-            <div class="merch-item-category">APPAREL</div>
-            <div class="merch-item-title">RONIN<br>HOODIE</div>
-            <div class="merch-item-price">$59.99</div>
-            <a href="shop.html" class="merch-item-btn">
-              VIEW PRODUCT
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-              </svg>
-            </a>
-          </div>
-          <div class="merch-item-right">
-            <div class="merch-item-image" style="background-image: url('Coming soon.png');"></div>
-          </div>
-        </div>
-        <div class="merch-item">
-          <div class="merch-item-left">
-            <div class="merch-item-category">APPAREL</div>
-            <div class="merch-item-title">RONIN<br>TEE</div>
-            <div class="merch-item-price">$24.99</div>
-            <a href="shop.html" class="merch-item-btn">
-              VIEW PRODUCT
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-              </svg>
-            </a>
-          </div>
-          <div class="merch-item-right">
-            <div class="merch-item-image" style="background-image: url('Coming soon.png');"></div>
-          </div>
-        </div>
+  <section id="customs" class="fade-up">
+    <h2>Ronin Customs</h2>
+    <p class="customs-subtitle">Join Ronin's exclusive Fortnite customs and compete for real money prizes. Elite competition, professional production, serious rewards.</p>
+    
+    <div class="customs-content">
+      <div class="customs-feature">
+        <h3>Cash Prizes</h3>
+        <p>Compete in high-stakes custom matches with real money on the line. Every game matters.</p>
       </div>
-      <button class="merch-nav prev" id="merchPrev">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-        </svg>
-      </button>
-      <button class="merch-nav next" id="merchNext">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-        </svg>
-      </button>
-      <div class="merch-indicators">
-        <div class="merch-indicator active"></div>
-        <div class="merch-indicator"></div>
-        <div class="merch-indicator"></div>
+      
+      <div class="customs-feature">
+        <h3>Live on Twitch</h3>
+        <p>All customs streamed live with professional commentary and production quality.</p>
+      </div>
+      
+      <div class="customs-feature">
+        <h3>Community Driven</h3>
+        <p>Open to all skill levels. Rise through the ranks and prove yourself against the best.</p>
       </div>
     </div>
+
+    <a href="https://discord.gg/qaTWR7PtHa" target="_blank" class="customs-cta">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      Join Discord
+    </a>
+    
+    <a href="https://www.twitch.tv/roningamingggs" target="_blank" class="customs-cta" style="background: #9146FF;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+      </svg>
+      Watch Live
+    </a>
   </section>
 
   <section id="about" class="fade-up">
@@ -1128,64 +982,69 @@
     </div>
   </section>
 
-  <section id="vision" class="fade-up">
-    <div class="vision-header">
-      <h2>Our Foundation</h2>
-      <p>Built on Three Core Principles</p>
-    </div>
-    <div class="vision-container">
-      <div class="vision-card">
-        <div class="vision-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-          </svg>
+  <section id="merch" class="fade-up">
+    <div class="merch-full">
+      <div class="merch-slide active">
+        <div class="merch-info">
+          <div class="merch-category">JERSEYS</div>
+          <h3>Ronin 2026 Pro Jersey</h3>
+          <div class="merch-price">$49.99</div>
+          <a href="shop.html" class="merch-btn">
+            View Product
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </a>
         </div>
-        <h3>Performance</h3>
-        <p>Excellence in competition through structured training, data-driven analysis, and continuous improvement. We cultivate talent that performs at the highest level.</p>
-      </div>
-      <div class="vision-card">
-        <div class="vision-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-          </svg>
+        <div class="merch-image">
+          <img src="Coming soon.png" alt="Ronin 2026 Pro Jersey">
         </div>
-        <h3>Transparency</h3>
-        <p>Clear communication, fair contracts, and honest dealings. Every player knows exactly where they stand and what to expect from the organization.</p>
       </div>
-      <div class="vision-card">
-        <div class="vision-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h2V7h-4v2h2z"/>
-          </svg>
-        </div>
-        <h3>Growth</h3>
-        <p>Long-term player development and brand building. We invest in careers, not quick wins. Success is measured over years, not months.</p>
-      </div>
-    </div>
-  </section>
 
-  <section id="competitive" class="fade-up">
-    <div class="competitive-header">
-      <h2>Divisions</h2>
-      <p>Ronin competes at the highest level across multiple disciplines, maintaining a presence in premier tournaments and leagues worldwide.</p>
-    </div>
-    <div class="competitive-grid">
-      <div class="competitive-item">
-        <div class="competitive-item-image" style="background-image: url('https://placehold.co/800x400/1a1a1a/C92828?text=Fortnite+Competitive');"></div>
-        <div class="competitive-item-content">
-          <h3>Fortnite</h3>
-          <p>Our flagship competitive division. Multiple rosters competing in FNCS, Cash Cups, and major tournaments with consistent top placements.</p>
-          <a href="team.html">VIEW ROSTER</a>
+      <div class="merch-slide">
+        <div class="merch-info">
+          <div class="merch-category">APPAREL</div>
+          <h3>Ronin Hoodie</h3>
+          <div class="merch-price">$59.99</div>
+          <a href="shop.html" class="merch-btn">
+            View Product
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="merch-image">
+          <img src="Coming soon.png" alt="Ronin Hoodie">
         </div>
       </div>
-      <div class="competitive-item">
-        <div class="competitive-item-image" style="background-image: url('https://placehold.co/800x400/1a1a1a/C92828?text=Content+Creation');"></div>
-        <div class="competitive-item-content">
-          <h3>Content Creation</h3>
-          <p>Professional content creators building audiences and strengthening the Ronin brand across YouTube, Twitch, and TikTok platforms.</p>
-          <a href="team.html">MEET CREATORS</a>
+
+      <div class="merch-slide">
+        <div class="merch-info">
+          <div class="merch-category">APPAREL</div>
+          <h3>Ronin Tee</h3>
+          <div class="merch-price">$24.99</div>
+          <a href="shop.html" class="merch-btn">
+            View Product
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </a>
+        </div>
+        <div class="merch-image">
+          <img src="Coming soon.png" alt="Ronin Tee">
         </div>
       </div>
+
+      <button class="merch-nav" id="merchPrev">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+      <button class="merch-nav" id="merchNext">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
     </div>
   </section>
 
@@ -1202,7 +1061,7 @@
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           </a>
           <a href="https://www.tiktok.com/@roninggs" target="_blank" title="TikTok">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.40-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
           </a>
           <a href="https://www.twitch.tv/roningamingggs" target="_blank" title="Twitch">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
@@ -1228,7 +1087,7 @@
           <li><a href="/">Home</a></li>
           <li><a href="team.html">Team</a></li>
           <li><a href="news.html">News</a></li>
-          <li><a href="compete.html">Compete</a></li>
+          <li><a href="partners.html">Partners</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -1254,91 +1113,117 @@
     }, { threshold: 0.2 });
     fadeUps.forEach(el => observer.observe(el));
 
+    // Smooth hero background zoom on scroll
+    const heroBg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const maxZoom = 1.15;
+      const zoom = 1 + Math.min(scrollY / 1500, maxZoom - 1);
+      heroBg.style.transform = `scale(${zoom})`;
+    });
+
     // News Carousel
-    const newsTrack = document.getElementById('newsTrack');
-    const newsUpBtn = document.getElementById('newsUpBtn');
-    const newsDownBtn = document.getElementById('newsDownBtn');
+    const track = document.getElementById('newsTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('carouselDots');
     
-    let newsIndex = 0;
-    const totalNewsCards = 4;
-    const newsCardHeight = 380;
+    let currentIndex = 0;
+    let autoRotateInterval;
 
-    function updateNewsCarousel() {
-      const offset = -newsIndex * newsCardHeight;
-      newsTrack.style.transform = `translateY(${offset}px)`;
+    for (let i = 0; i < 2; i++) {
+      const dot = document.createElement('button');
+      dot.classList.add('carousel-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    function updateCarousel() {
+      const offset = -currentIndex * 600;
+      track.style.transform = `translateY(${offset}px)`;
       
-      newsUpBtn.disabled = newsIndex === 0;
-      newsDownBtn.disabled = newsIndex === totalNewsCards - 1;
-    }
-
-    function nextNewsSlide() {
-      if (newsIndex < totalNewsCards - 1) {
-        newsIndex++;
-        updateNewsCarousel();
-      }
-    }
-
-    function prevNewsSlide() {
-      if (newsIndex > 0) {
-        newsIndex--;
-        updateNewsCarousel();
-      }
-    }
-
-    newsUpBtn.addEventListener('click', prevNewsSlide);
-    newsDownBtn.addEventListener('click', nextNewsSlide);
-
-    // Auto-rotate news carousel
-    setInterval(() => {
-      if (newsIndex < totalNewsCards - 1) {
-        nextNewsSlide();
-      } else {
-        newsIndex = 0;
-        updateNewsCarousel();
-      }
-    }, 6000);
-
-    updateNewsCarousel();
-
-    // Merch Carousel
-    const merchTrack = document.getElementById('merchTrack');
-    const merchPrevBtn = document.getElementById('merchPrev');
-    const merchNextBtn = document.getElementById('merchNext');
-    const merchIndicators = document.querySelectorAll('.merch-indicator');
-    
-    let merchIndex = 0;
-    const totalItems = 3;
-
-    function updateMerchCarousel() {
-      const itemWidth = merchTrack.querySelector('.merch-item').offsetWidth;
-      merchTrack.style.transform = `translateX(-${merchIndex * itemWidth}px)`;
-      
-      merchIndicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === merchIndex);
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
       });
     }
 
-    merchNextBtn.addEventListener('click', () => {
-      merchIndex = (merchIndex + 1) % totalItems;
-      updateMerchCarousel();
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % 2;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + 2) % 2;
+      updateCarousel();
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateCarousel();
+      resetAutoRotate();
+    }
+
+    function startAutoRotate() {
+      autoRotateInterval = setInterval(nextSlide, 4000);
+    }
+
+    function resetAutoRotate() {
+      clearInterval(autoRotateInterval);
+      startAutoRotate();
+    }
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetAutoRotate();
     });
 
-    merchPrevBtn.addEventListener('click', () => {
-      merchIndex = (merchIndex - 1 + totalItems) % totalItems;
-      updateMerchCarousel();
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetAutoRotate();
     });
 
-    merchIndicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        merchIndex = index;
-        updateMerchCarousel();
+    startAutoRotate();
+
+    // Merch carousel
+    const merchSlides = document.querySelectorAll('.merch-slide');
+    let currentSlide = 0;
+    const totalSlides = merchSlides.length;
+    let merchTimer;
+
+    function showSlide(index) {
+      merchSlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
       });
+    }
+
+    function nextMerchSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    function prevMerchSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    document.getElementById('merchNext').addEventListener('click', () => {
+      clearInterval(merchTimer);
+      nextMerchSlide();
+      startMerchLoop();
+    });
+    document.getElementById('merchPrev').addEventListener('click', () => {
+      clearInterval(merchTimer);
+      prevMerchSlide();
+      startMerchLoop();
     });
 
-    setInterval(() => {
-      merchIndex = (merchIndex + 1) % totalItems;
-      updateMerchCarousel();
-    }, 6000);
+    function startMerchLoop() {
+      merchTimer = setInterval(nextMerchSlide, 5000);
+    }
+    startMerchLoop();
   </script>
 </body>
 </html>
