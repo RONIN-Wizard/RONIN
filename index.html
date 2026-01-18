@@ -62,7 +62,7 @@
       text-decoration: none; 
       gap: 0px; 
     }
-    .logo img { height: 40px; width: auto; }
+    .logo img { height: 50px; width: auto; }
     .logo span {
       display: none;
     }
@@ -457,7 +457,7 @@
     /* MERCH SECTION - SENTINELS STYLE */
     #merch {
       position: relative;
-      background: #161616;
+      background: #000;
       padding: 0;
       border-top: 1px solid rgba(201, 40, 40, 0.3);
       overflow: hidden;
@@ -476,7 +476,22 @@
       z-index: 0;
     }
 
-    #merch * { position: relative; z-index: 1; }
+    .merch-container {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .merch-left {
+      flex: 0 0 45%;
+      background: transparent;
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
 
     .merch-container {
       display: flex;
@@ -649,7 +664,7 @@
       justify-content: space-between;
       padding: 120px 60px;
       gap: 80px;
-      background: #161616;
+      background: #000;
       color: #fff;
       border-top: 1px solid rgba(201, 40, 40, 0.3);
       position: relative;
@@ -701,7 +716,7 @@
 
     /* VISION SECTION */
     #vision {
-      background: #161616;
+      background: #000;
       padding: 120px 60px;
       border-top: 1px solid rgba(201, 40, 40, 0.3);
       position: relative;
@@ -820,7 +835,7 @@
     /* FOOTER */
     footer {
       padding: 80px 60px 40px;
-      background: #161616;
+      background: #000;
       color: #fff;
       border-top: 1px solid rgba(201, 40, 40, 0.3);
       position: relative;
