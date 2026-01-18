@@ -57,7 +57,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 50px;
+      padding: 20px 60px;
       background: rgba(0, 0, 0, 0.95);
       backdrop-filter: blur(20px);
       position: fixed;
@@ -84,13 +84,15 @@
 
     header * { position: relative; z-index: 1; }
 
-    .logo { display: flex; align-items:flex-end; text-decoration: none; gap: 8px; }
-    .logo img { height: 45px; width: auto; }
+    .logo { 
+      display: flex; 
+      align-items: center; 
+      text-decoration: none; 
+      gap: 0px; 
+    }
+    .logo img { height: 50px; width: auto; }
     .logo span {
-      font-family: 'TheLastShuriken';
-      font-size: 28px;
-      color: #C92828;
-      letter-spacing: 2px;
+      display: none;
     }
 
     .center-header-text {
@@ -98,19 +100,23 @@
       left: 50%;
       transform: translateX(-50%);
       font-family: 'TheLastShuriken';
-      font-size: 22px;
+      font-size: 18px;
       color: #C92828;
-      letter-spacing: 2px;
+      letter-spacing: 4px;
+      font-weight: 400;
+      text-transform: uppercase;
     }
     
-    nav.nav-links { display: flex; align-items: center; }
+    nav.nav-links { display: flex; align-items: center; gap: 40px; }
     nav.nav-links a {
-      font-family: 'TheLastShuriken';
+      font-family: 'Rajdhani';
       color: #fff;
       text-decoration: none;
-      margin-left: 25px;
-      font-size: 18px;
-      transition: color 0.3s;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s;
       position: relative;
     }
     nav.nav-links a::after {
@@ -125,7 +131,7 @@
     }
     nav.nav-links a:hover::after { width: 100%; }
     nav.nav-links a:hover { color: #C92828; }
-    nav.nav-links a.active { color: #C92828; font-weight: 600; }
+    nav.nav-links a.active { color: #C92828; }
 
     .team-section {
       min-height: 100vh;
@@ -672,8 +678,8 @@
     <div class="center-header-text">#OwnTheBlade</div>
 
     <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="partners.html">Partners</a>
+      <a href="/">Home</a>
+      <a href="compete.html">Compete</a>
       <a href="team.html" class="active">Team</a>
       <a href="news.html">News</a>
       <a href="shop.html">Shop</a>
