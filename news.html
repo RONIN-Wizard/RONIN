@@ -661,29 +661,29 @@
 
   <section class="news-filters">
     <div class="filters-container">
-      <button class="filter-btn active">All News</button>
-      <button class="filter-btn">Tournaments</button>
-      <button class="filter-btn">Team Updates</button>
-      <button class="filter-btn">Partnerships</button>
-      <button class="filter-btn">Community</button>
+      <button class="filter-btn active" data-filter="all">All News</button>
+      <button class="filter-btn" data-filter="tournament">Tournaments</button>
+      <button class="filter-btn" data-filter="team">Team Updates</button>
+      <button class="filter-btn" data-filter="partnership">Partnerships</button>
+      <button class="filter-btn" data-filter="community">Community</button>
     </div>
   </section>
 
   <section class="news-grid-section">
     <div class="news-grid">
       
-      <article class="featured-article">
+      <article class="featured-article" data-category="team">
         <div class="featured-image">
           <div class="featured-badge">FEATURED</div>
           <img src="Coming soon.png" alt="Featured Article">
         </div>
         <div class="featured-content">
           <div class="article-meta">
-            <span class="article-category">TOURNAMENT</span>
+            <span class="article-category">TEAM UPDATE</span>
             <span class="article-date">January 18, 2026</span>
           </div>
-          <h2 class="article-title">RONIN CLAIMS CHAMPIONSHIP VICTORY</h2>
-          <p class="article-excerpt">In a stunning display of tactical prowess and mechanical excellence, RONIN secured their first major championship title. The team's coordinated assault and defensive resilience proved unstoppable throughout the grand finals, cementing their position as elite competitors in the global esports arena.</p>
+          <h2 class="article-title">RONIN 2026 RELAUNCH</h2>
+          <p class="article-excerpt">The blade has been sharpened. After months of strategic planning and roster development, RONIN returns to competitive esports with renewed purpose and unwavering determination. Our warriors are ready to reclaim their place among the elite, armed with fresh talent, tactical innovation, and the relentless spirit that defines the way of the masterless samurai.</p>
           <a href="#" class="read-more">
             READ FULL STORY
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -693,7 +693,7 @@
         </div>
       </article>
 
-      <a href="#" class="news-card">
+      <a href="#" class="news-card" data-category="team">
         <div class="card-image">
           <div class="card-badge">TEAM UPDATE</div>
           <img src="Coming soon.png" alt="News">
@@ -708,7 +708,7 @@
         </div>
       </a>
 
-      <a href="#" class="news-card">
+      <a href="#" class="news-card" data-category="partnership">
         <div class="card-image">
           <div class="card-badge">PARTNERSHIP</div>
           <img src="Coming soon.png" alt="News">
@@ -723,7 +723,7 @@
         </div>
       </a>
 
-      <a href="#" class="news-card">
+      <a href="#" class="news-card" data-category="community">
         <div class="card-image">
           <div class="card-badge">COMMUNITY</div>
           <img src="Coming soon.png" alt="News">
@@ -738,7 +738,7 @@
         </div>
       </a>
 
-      <a href="#" class="news-card">
+      <a href="#" class="news-card" data-category="tournament">
         <div class="card-image">
           <div class="card-badge">TOURNAMENT</div>
           <img src="Coming soon.png" alt="News">
@@ -753,7 +753,7 @@
         </div>
       </a>
 
-      <a href="#" class="news-card">
+      <a href="#" class="news-card" data-category="community">
         <div class="card-image">
           <div class="card-badge">CONTENT</div>
           <img src="Coming soon.png" alt="News">
@@ -764,26 +764,26 @@
             <span class="card-date">January 5, 2026</span>
           </div>
           <h3 class="card-title">BEHIND THE SCENES DOCUMENTARY</h3>
-          <p class="card-excerpt">Exclusive documentary series reveals the dedication and preparation behind RONIN's championship run.</p>
+          <p class="card-excerpt">Exclusive documentary series reveals the dedication and preparation behind RONIN's competitive journey.</p>
         </div>
       </a>
 
-      <a href="#" class="news-card">
+      <a href="#" class="news-card" data-category="team">
         <div class="card-image">
           <div class="card-badge">TEAM UPDATE</div>
           <img src="Coming soon.png" alt="News">
         </div>
         <div class="card-content">
           <div class="card-meta">
-            <span class="card-category">TRAINING</span>
+            <span class="card-category">ANNOUNCEMENT</span>
             <span class="card-date">January 3, 2026</span>
           </div>
-          <h3 class="card-title">NEW TRAINING FACILITY UNVEILED</h3>
-          <p class="card-excerpt">RONIN reveals state-of-the-art training headquarters equipped with cutting-edge technology and facilities.</p>
+          <h3 class="card-title">STRATEGIC GAMING HOUSE SECURED</h3>
+          <p class="card-excerpt">RONIN establishes dedicated team headquarters for synchronized practice and strategic development.</p>
         </div>
       </a>
 
-      <a href="#" class="news-card">
+      <a href="#" class="news-card" data-category="partnership">
         <div class="card-image">
           <div class="card-badge">PARTNERSHIP</div>
           <img src="Coming soon.png" alt="News">
@@ -798,7 +798,7 @@
         </div>
       </a>
 
-      <a href="#" class="news-card">
+      <a href="#" class="news-card" data-category="community">
         <div class="card-image">
           <div class="card-badge">COMMUNITY</div>
           <img src="Coming soon.png" alt="News">
@@ -870,11 +870,32 @@
 
   <script>
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const newsCards = document.querySelectorAll('.news-card');
+    const featuredArticle = document.querySelector('.featured-article');
     
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
+        // Update active button
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        
+        const filter = btn.getAttribute('data-filter');
+        
+        // Filter cards
+        newsCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Filter featured article
+        if (filter === 'all' || featuredArticle.getAttribute('data-category') === filter) {
+          featuredArticle.style.display = 'grid';
+        } else {
+          featuredArticle.style.display = 'none';
+        }
       });
     });
   </script>
